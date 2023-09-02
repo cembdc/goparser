@@ -1,0 +1,11 @@
+{
+    "direction":"input",
+    "source":"mqtt",
+    "sourceSettings":{
+        "host":"tcp://broker.emqx.io",
+        "port":"1883",
+        "clientId":"goparser",
+        "user":"",
+        "password":""
+    }
+}
