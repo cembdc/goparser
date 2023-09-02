@@ -1,11 +1,28 @@
 {
-    "direction": "input",
-    "source": "mqtt",
-    "sourceSettings": {
-        "host": "tcp://broker.emqx.io",
-        "port": 1883,
-        "clientId": "goparser",
-        "user": "",
-        "password": ""
-    }
+    "configs": [
+        {
+            "direction": "input",
+            "source": "mqtt",
+            "sourceSettings": {
+                "host": "tcp://broker.emqx.io",
+                "port": 1883,
+                "clientId": "goparser",
+                "user": "",
+                "password": "",
+                "topic": "sensors/#"
+            }
+        },
+        {
+            "direction": "output",
+            "source": "mqtt",
+            "sourceSettings": {
+                "host": "tcp://broker.emqx.io",
+                "port": 1883,
+                "clientId": "goparser",
+                "user": "",
+                "password": "",
+                "topic": "todb"
+            }
+        }
+    ]
 }
