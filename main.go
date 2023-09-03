@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 func main() {
@@ -15,22 +17,9 @@ func main() {
 
 	dynamicJson(f)
 
-	// var data map[string]interface{}
-	// json.Unmarshal([]byte(f), &data)
-
-	// log.Println(data)
-	// for k, v := range data {
-	// 	log.Println(k, ":", v)
-	// }
-
-	// pingJSON := make(map[string][]mqttconfig)
-	// err = json.Unmarshal([]byte(f), &pingJSON)
-
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	// fmt.Printf("\n\n json object:::: %+v", pingJSON)
+	exitSignal := make(chan os.Signal, 1)
+	signal.Notify(exitSignal, syscall.SIGINT, syscall.SIGTERM)
+	<-exitSignal
 }
 
 func dynamicJson(input []byte) {
@@ -67,6 +56,8 @@ func dynamicJson(input []byte) {
 			fmt.Println(mqttconf.Topic)
 			fmt.Println(mqttconf.User)
 			fmt.Println(mqttconf.Password)
+
+			go connect(mqttconf)
 		default:
 			log.Fatalf("unknown message type: %q", conf.Source)
 		}
